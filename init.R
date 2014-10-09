@@ -13,7 +13,7 @@
 # Function to load libraries
 loadLibraries <- function(x){
   for(i in seq_along(x)){
-    library(x[i], character.only=TRUE)
+    library(x[i])
   }
 }
 
