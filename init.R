@@ -89,4 +89,3 @@ setProxy <- function(proxyUrl, port){
     set_config(use_proxy(url=proxyUrl, port=port, username=usr, password=pwd))
   }
 }
- 
