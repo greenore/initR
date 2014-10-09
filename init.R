@@ -1,3 +1,14 @@
+#!/usr/bin/Rscript
+# Purpose:         Small initialization script
+# Date:            2014-10-09
+# Author:          Tim Hagmann
+# Data Used:       
+# Packages Used:   devtools, httr
+# Machine:         X10004328 (Win 32)
+# Notes:
+# R Version:       R version 3.1.1 -- "Sock it to Me"
+################################################################################
+
 # Helper Functions
 #-----------------
 # Function to load libraries
@@ -38,7 +49,7 @@ packagesBioconductor <- function(requiredPackages, update=F){
 packagesGithub <- function(requiredPackages, repoName, authToken=NULL, 
                           proxyUrl=NULL, port=NULL,
                           update=F){
-  require('devtools')
+  packagesCRAN('devtools')
   
   missingPackages <- requiredPackages[!(requiredPackages %in% installed.packages()[ ,"Package"])]
   
@@ -65,7 +76,7 @@ pingServer <- function(url, stderr=F, stdout=F, ...){
 }
 
 setProxy <- function(proxyUrl, port){
-  require(httr)
+  packagesCRAN(httr)
   
   port <- as.numeric(port)
   
