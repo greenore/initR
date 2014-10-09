@@ -78,13 +78,3 @@ setProxy <- function(proxyUrl, port){
     set_config(use_proxy(url=proxyUrl, port=port, username=usr, password=pwd))
   }
 }
-
-# Check if RTools is installed
-checkRTools <- function(){
-  if(!find_rtools()){
-    e(paste0("WARNING: Rtools is required to build R packages, but is not currently installed.",
-                   "\n\n", "Please download and install Rtools 3.1 from http://cran.r-project.org/bin/windows/Rtools/ ",
-                   "and then run again!"))
-    stop()
-  }
-}
