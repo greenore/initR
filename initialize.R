@@ -7,7 +7,7 @@ loadLibraries <- function(x){
   }
 }
 
-# Function to install missing packages from CRAN 
+# Function to install and/or load packages from CRAN 
 packagesCRAN <- function(requiredPackages, update=F){
   missingPackages <- requiredPackages[!(requiredPackages %in% installed.packages()[,"Package"])]
   
@@ -19,7 +19,7 @@ packagesCRAN <- function(requiredPackages, update=F){
   loadLibraries(requiredPackages)
 }
 
-# Function to install missing packages from Bioconductor 
+# Function to install and/or load missing packages from Bioconductor 
 packagesBioconductor <- function(requiredPackages, update=F){
   missingPackages <- requiredPackages[!(requiredPackages %in% installed.packages()[,"Package"])]
   
@@ -34,7 +34,7 @@ packagesBioconductor <- function(requiredPackages, update=F){
   loadLibraries(requiredPackages)
 }
 
-# Function to install missing packages from Github 
+# Function to install and/or load missing packages from Github 
 packagesGithub <- function(requiredPackages, repoName, authToken=NULL, 
                           proxyUrl="webproxy.balgroupit.com", port=3128,
                           update=F){
