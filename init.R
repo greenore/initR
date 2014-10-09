@@ -11,9 +11,9 @@
 
 ## Helper Functions
 # Function to load libraries
-loadLibraries <- function(x){
-  for(i in seq_along(x)){
-    library(x[i])
+loadLibraries <- function(requiredPackages){
+  for(i in seq_along(requiredPackages)){
+    library(requiredPackages[i])
   }
 }
 
@@ -58,7 +58,7 @@ packagesGithub <- function(requiredPackages, repoName, authToken=NULL,
       missingPackages <- paste0(repoName, '/', requiredPackages) # Base (required)
     }
     
-    for(i in 1:length(missingPackages)){
+    for(i in seq_along(missingPackages)){
       install_github(repo=missingPackages[i], auth_token=authToken)
     }    
   }
