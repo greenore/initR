@@ -1,7 +1,6 @@
 initR
 =====
 
-A small script to initialize R. The easiest way to use this file is to source the RawGitdirectly from GitHub with proper Content-Type headers. 
+A small script to initialize R. The easiest way to use this file is to source the RawGit directly from GitHub, i.e.,:
 
-## Example
 source("https://rawgit.com/greenore/initR/master/init.R")
