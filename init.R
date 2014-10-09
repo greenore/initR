@@ -35,7 +35,11 @@ packagesBioconductor <- function(requiredPackages, update=F){
   
   if(length(missingPackages) > 0 || update){
     if(update){missingPackages <- requiredPackages} # Base (required)
-    source("https://rawgit.com/greenore/initR/master/biocLite.R")
+    dir.create("tmp")
+    download.file(url="https://rawgit.com/greenore/initR/master/biocLite.R",
+                  destfile="tmp/biocLite.R", method="wget")
+    source("tmp/biocLite.R")
+    unlink("tmp", recursive=TRUE)
     biocLite(missingPackages)
   }
   
