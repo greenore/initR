@@ -9,7 +9,7 @@ loadLibraries <- function(x){
 
 # Function to install and/or load packages from CRAN 
 packagesCRAN <- function(requiredPackages, update=F){
-  missingPackages <- requiredPackages[!(requiredPackages %in% installed.packages()[,"Package"])]
+  missingPackages <- requiredPackages[!(requiredPackages %in% installed.packages()[ ,"Package"])]
   
   if(length(missingPackages) > 0 || update){
     if(update){missingPackages <- requiredPackages} # Base (required)
@@ -21,7 +21,7 @@ packagesCRAN <- function(requiredPackages, update=F){
 
 # Function to install and/or load missing packages from Bioconductor 
 packagesBioconductor <- function(requiredPackages, update=F){
-  missingPackages <- requiredPackages[!(requiredPackages %in% installed.packages()[,"Package"])]
+  missingPackages <- requiredPackages[!(requiredPackages %in% installed.packages()[ ,"Package"])]
   
   if(length(missingPackages) > 0 || update){
     if(update){missingPackages <- requiredPackages} # Base (required)
@@ -36,11 +36,11 @@ packagesBioconductor <- function(requiredPackages, update=F){
 
 # Function to install and/or load missing packages from Github 
 packagesGithub <- function(requiredPackages, repoName, authToken=NULL, 
-                          proxyUrl="webproxy.balgroupit.com", port=3128,
+                          proxyUrl=NULL, port=NULL,
                           update=F){
   require('devtools')
   
-  missingPackages <- requiredPackages[!(requiredPackages %in% installed.packages()[,"Package"])]
+  missingPackages <- requiredPackages[!(requiredPackages %in% installed.packages()[ ,"Package"])]
   
   if(length(missingPackages) > 0 || update){
     setProxy(proxyUrl=proxyUrl, port=port)
