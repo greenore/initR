@@ -37,9 +37,7 @@ packagesBioconductor <- function(requiredPackages, update=F){
   if(length(missingPackages) > 0 || update){
     if(update){missingPackages <- requiredPackages} # Base (required)
     source("https://rawgit.com/greenore/initR/master/biocLite.R")
-    for(i in seq_along(missingPackages)){
-      biocLite(missingPackages[i], character.only=TRUE)
-    }
+    biocLite(missingPackages)
   }
   
   loadLibraries(requiredPackages)
