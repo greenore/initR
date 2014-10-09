@@ -46,7 +46,7 @@ packagesBioconductor <- function(requiredPackages, update=F){
 packagesGithub <- function(requiredPackages, repoName, authToken=NULL, 
                            proxyUrl=NULL, port=NULL,
                            update=F){
-  packagesCRAN('devtools')
+  packagesCRAN("devtools")
   
   missingPackages <- requiredPackages[!(requiredPackages %in% installed.packages()[ ,"Package"])]
   
@@ -73,7 +73,7 @@ pingServer <- function(url, stderr=F, stdout=F, ...){
 }
 
 setProxy <- function(proxyUrl, port){
-  packagesCRAN(httr)
+  packagesCRAN("httr")
   
   port <- as.numeric(port)
   
