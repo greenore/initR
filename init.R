@@ -79,6 +79,7 @@ pingServer <- function(url, stderr=F, stdout=F, ...){
   if (vec == 0){TRUE} else {FALSE}
 }
 
+# Function to set a proxy
 setProxy <- function(proxyUrl, port){
   packagesCRAN("httr")
   
@@ -92,4 +93,16 @@ setProxy <- function(proxyUrl, port){
     reset_config()
     set_config(use_proxy(url=proxyUrl, port=port, username=usr, password=pwd))
   }
+}
+
+# Cut txt to either the left or right of an identifier
+cutTxt <- function(x, identifier, regex="[[:alnum:]]{1, }", cut2="right"){
+  if(cut2=="right"){
+    x <- gsub(paste0(identifier, regex), "", x)
+  }
+
+  if(cut2=="left"){
+    x <- gsub(paste0(regex, identifier), "", x)
+  }
+  x
 }
