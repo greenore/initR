@@ -12,6 +12,8 @@
 ## Helper Functions
 # Function to load libraries
 loadLibraries <- function(requiredPackages){
+  requiredPackages <- gsub("@[[:alnum:]]{1, }", "", requiredPackages) # Remove @ dev etc.
+
   for(i in seq_along(requiredPackages)){
     library(requiredPackages[i], character.only=TRUE)
   }
