@@ -69,7 +69,7 @@ packagesGithub <- function(required_packages, repo_name, auth_token=NULL,
       full_repo_name <- paste0(repo_name, '/', required_packages) # Base (required)
     }
     
-    for(i in seq_along(missing_packages)){
+    for(i in seq_along(full_repo_name)){
       install_github(repo=full_repo_name[i], auth_token=auth_token)
     }    
   }
