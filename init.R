@@ -1,6 +1,6 @@
 #!/usr/bin/Rscript
 # Purpose:         Small initialization script
-# Date:            2014-10-09
+# Date:            2014-11-12
 # Author:          Tim Hagmann
 # Notes:           WINDOWS: In order for it to work, RTools() has to be installed
 # R Version:       R version 3.1.1 -- "Sock it to Me"
