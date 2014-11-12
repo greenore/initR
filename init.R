@@ -45,12 +45,13 @@ initEnv$packagesBioconductor <- function(required_packages, update=FALSE){
 
   if(length(missing_packages) > 0 || update){
     if(update){missing_packages <- required_packages} # Base (required)
-    dir.create("tmp")
-    download.file(url="https://rawgit.com/greenore/initR/master/biocLite.R",
-                  destfile="tmp/biocLite.R",
-                  method=ifelse(Sys.info()["sysname"][[1]] == "Linux", "wget", "auto"))
-    source("tmp/biocLite.R")
-    unlink("tmp", recursive=TRUE)
+
+    if(Sys.info()["sysname"][[1]] == "Linux"){
+      source(pipe(paste("wget -O -", "https://rawgit.com/greenore/initR/master/biocLite.R")))
+    } else {
+      source("https://rawgit.com/greenore/initR/master/biocLite.R")
+    }
+    
     biocLite(missing_packages)
   }
 
