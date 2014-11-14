@@ -17,7 +17,7 @@ initEnv$loadPackage <- function(required_packages){
 
   for(i in seq_along(required_packages_cut)){
     library(required_packages_cut[i], character.only=TRUE)
-    message(paste0("loaded package: ", package_name))
+    message(paste0("loaded package: ", required_packages_cut[i]))
   }
 }
 
