@@ -111,8 +111,8 @@ initEnv$setProxy <- function(proxy_url, port){
   port <- as.numeric(port)
 
   if(pingServer(proxy_url)){
-    usr <- readline("Bitte Benutzername eingeben: ")
-    pwd <- readline("Bitte Passwort eingeben: ")
+    usr <- readline("Username: ")
+    pwd <- readline("Password: ")
     cat("\14")
 
     reset_config()
