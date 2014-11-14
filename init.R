@@ -13,11 +13,11 @@ initEnv <- new.env()
 ## Library Functions
 # Function to load libraries
 initEnv$loadPackage <- function(required_packages){
-  required_packages_cut <- cutTxt(x=required_packages, identifier="@", cut2="right") # Remove @ dev etc.
+  required_packages <- cutTxt(x=required_packages, identifier="@", cut2="right") # Remove @ dev etc.
 
-  for(i in seq_along(required_packages_cut)){
-    library(required_packages_cut[i], character.only=TRUE)
-    message(paste0("loaded package: ", required_packages_cut[i]))
+  for(i in seq_along(required_packages)){
+    library(required_packages[i], character.only=TRUE)
+    message(paste0("loaded package: ", required_packages[i]))
   }
 }
 
@@ -28,6 +28,7 @@ initEnv$detachPackage <- function(required_packages){
     if(any(search() %in% package_name)){
       detach(package_name, unload=TRUE, character.only=TRUE)
       message(paste0("detached package: ", package_name))
+      if(any(grepl("packrat", .libPaths()))){Sys.sleep(2)}
     }
   }  
 }
