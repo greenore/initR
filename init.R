@@ -12,12 +12,24 @@ initEnv <- new.env()
 
 ## Library Functions
 # Function to load libraries
-initEnv$loadLibraries <- function(required_packages){
+initEnv$loadPackage <- function(required_packages){
   required_packages_cut <- cutTxt(x=required_packages, identifier="@", cut2="right") # Remove @ dev etc.
 
   for(i in seq_along(required_packages_cut)){
     library(required_packages_cut[i], character.only=TRUE)
+    message(paste0("loaded package: ", package_name))
   }
+}
+
+# Function to detach libraries
+initEnv$detachPackage <- function(required_packages){
+  for(i in seq_along(required_packages)){
+    package_name <- paste0("package:", required_packages[i])
+    if(any(search() %in% package_name)){
+      detach(package_name, unload=TRUE, character.only=TRUE)
+      message(paste0("detached package: ", package_name))
+    }
+  }  
 }
 
 # Function to find missing packages
@@ -33,10 +45,11 @@ initEnv$packagesCRAN <- function(required_packages, update=FALSE){
 
   if(length(missing_packages) > 0 || update){
     if(update){missing_packages <- required_packages} # Base (required)
+    detachPackage(missing_packages)
     install.packages(missing_packages)
   }
 
-  loadLibraries(required_packages)
+  loadPackage(required_packages)
 }
 
 # Function to install and/or load missing packages from Bioconductor
@@ -51,11 +64,12 @@ initEnv$packagesBioconductor <- function(required_packages, update=FALSE){
     } else {
       source("https://rawgit.com/greenore/initR/master/biocLite.R")
     }
-    
+
+    detachPackage(missing_packages)
     biocLite(missing_packages)
   }
 
-  loadLibraries(required_packages)
+  loadPackage(required_packages)
 }
 
 # Function to install and/or load missing packages from Github
@@ -75,11 +89,12 @@ initEnv$packagesGithub <- function(required_packages, repo_name, auth_token=NULL
     }
 
     for(i in seq_along(full_repo_name)){
+      detachPackage(missing_packages)
       install_github(repo=full_repo_name[i], auth_token=auth_token)
     }
   }
 
-  loadLibraries(required_packages)
+  loadPackage(required_packages)
 }
 
 ## Proxy Functions
