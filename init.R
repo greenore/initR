@@ -77,7 +77,7 @@ initEnv$packagesBioconductor <- function(required_packages, update=FALSE){
 initEnv$packagesGithub <- function(required_packages, repo_name, auth_token=NULL,
                            proxy_url=NULL, port=NULL,
                            update=FALSE){
-  packagesCRAN("devtools")
+  packagesCRAN(c("devtools", "RCurl"))
 
   missing_packages <- findMissingPackages(required_packages)
 
