@@ -3,7 +3,7 @@
 # Date:            2014-11-12
 # Author:          Tim Hagmann
 # Notes:           WINDOWS: In order for it to work, RTools() has to be installed
-# R Version:       R version 3.1.1 -- "Sock it to Me"
+# R Version:       R version 3.1.2 -- "Pumpkin Helmet"
 ################################################################################
 
 ## Creat Environment
@@ -12,11 +12,11 @@ initEnv <- new.env()
 
 ## Library Functions
 # Function to load libraries
-initEnv$loadPackage <- function(required_packages){
+initEnv$loadPackage <- function(required_packages, lib.loc=NULL){
   required_packages <- cutTxt(x=required_packages, identifier="@", cut2="right") # Remove @ dev etc.
 
   for(i in seq_along(required_packages)){
-    library(required_packages[i], character.only=TRUE)
+    library(required_packages[i], character.only=TRUE, lib.loc)
     message(paste0("loaded package: ", required_packages[i]))
   }
 }
@@ -41,7 +41,7 @@ initEnv$findMissingPackages <- function(required_packages){
 }
 
 # Function to install and/or load packages from CRAN
-initEnv$packagesCRAN <- function(required_packages, update=FALSE){
+initEnv$packagesCRAN <- function(required_packages, update=FALSE, lib.loc=NULL){
   missing_packages <- findMissingPackages(required_packages)
 
   if(length(missing_packages) > 0 || update){
@@ -50,11 +50,11 @@ initEnv$packagesCRAN <- function(required_packages, update=FALSE){
     install.packages(missing_packages)
   }
 
-  loadPackage(required_packages)
+  loadPackage(required_packages, lib.loc=NULL)
 }
 
 # Function to install and/or load missing packages from Bioconductor
-initEnv$packagesBioconductor <- function(required_packages, update=FALSE){
+initEnv$packagesBioconductor <- function(required_packages, update=FALSE, lib.loc=NULL){
   missing_packages <- findMissingPackages(required_packages)
 
   if(length(missing_packages) > 0 || update){
@@ -70,13 +70,13 @@ initEnv$packagesBioconductor <- function(required_packages, update=FALSE){
     biocLite(missing_packages)
   }
 
-  loadPackage(required_packages)
+  loadPackage(required_packages, lib.loc=NULL)
 }
 
 # Function to install and/or load missing packages from Github
 initEnv$packagesGithub <- function(required_packages, repo_name, auth_token=NULL,
                            proxy_url=NULL, port=NULL,
-                           update=FALSE){
+                           update=FALSE, lib.loc=NULL){
   packagesCRAN(c("devtools", "RCurl"))
 
   missing_packages <- findMissingPackages(required_packages)
@@ -95,7 +95,7 @@ initEnv$packagesGithub <- function(required_packages, repo_name, auth_token=NULL
     }
   }
 
-  loadPackage(required_packages)
+  loadPackage(required_packages, lib.loc=NULL)
 }
 
 ## Proxy Functions
