@@ -2,8 +2,8 @@
 # Purpose:         Small initialization script
 # Date:            2014-11-12
 # Author:          Tim Hagmann
-# Notes:           WINDOWS: In order for it to work, RTools() has to be installed
-# R Version:       R version 3.1.2 -- "Pumpkin Helmet"
+# Notes:           WINDOWS: In order to build packages, RTools() should be installed
+# R Version:       R version 3.1.1 -- "Sock it to Me"
 ################################################################################
 
 ## Creat Environment
@@ -26,7 +26,7 @@ initEnv$detachPackage <- function(required_packages){
   for(i in seq_along(required_packages)){
     package_name <- paste0("package:", required_packages[i])
     if(any(search() %in% package_name)){
-      detach(package_name, unload=TRUE, character.only=TRUE)
+      suppressWarnings(detach(package_name, unload=TRUE, character.only=TRUE))
       message(paste0("detached package: ", package_name))
       if(any(grepl("packrat", .libPaths()))){Sys.sleep(2)}
     }
