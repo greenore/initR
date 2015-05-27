@@ -13,10 +13,15 @@ initEnv <- new.env()
 ## Library Functions
 
 # Check if a certain variable is defined in the ls, if not, set a value
-setMissingVar <- function(var, value){
-  if (var %in% ls() == value) {
+initEnv$setMissingVar <- function(var_name, value){
+  glob_env <- ls(envir = .GlobalEnv)
+
+  if (!var_name %in% glob_env) {
     msg <- "\nManually set the variable '%s' to %s\n"
-    message(sprintf(msg, var, value))
+    message(sprintf(msg, var_name, value))
+    assign(var_name, value, envir = .GlobalEnv)
+  } else {
+    eval(parse(text = var_name))
   }
 }
 
