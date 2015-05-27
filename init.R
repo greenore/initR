@@ -11,6 +11,15 @@ if(any(search() %in% "initEnv")) detach("initEnv")
 initEnv <- new.env()
 
 ## Library Functions
+
+# Check if a certain variable is defined in the ls, if not, set a value
+setMissingVar <- function(var, value){
+  if (var %in% ls() == value) {
+    msg <- "\nManually set the variable '%s' to %s\n"
+    message(sprintf(msg, var, value))
+  }
+}
+
 # Function to load libraries
 initEnv$loadPackage <- function(required_packages, lib.loc=NULL){
   required_packages <- cutTxt(x=required_packages, identifier="@", cut2="right") # Remove @ dev etc.
