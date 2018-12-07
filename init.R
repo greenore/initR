@@ -75,9 +75,9 @@ initEnv$packagesBioconductor <- function(required_packages, update=FALSE, lib.lo
     if(update){missing_packages <- required_packages} # Base (required)
 
     if(Sys.info()["sysname"][[1]] == "Linux"){
-      source(pipe(paste("wget -O -", "https://rawgit.com/greenore/initR/master/biocLite.R")))
+      source(pipe(paste("wget -O -", "https://cdn.jsdelivr.net/gh/greenore/initR/biocLite.R")))
     } else {
-      source("https://rawgit.com/greenore/initR/master/biocLite.R")
+      source("https://cdn.jsdelivr.net/gh/greenore/initR/biocLite.R")
     }
 
     detachPackage(missing_packages)
